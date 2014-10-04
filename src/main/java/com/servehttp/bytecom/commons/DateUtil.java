@@ -12,8 +12,8 @@ import java.util.logging.Logger;
  * @author clairton
  * 
  */
-public enum DateUtil {
-  INSTANCE;
+public abstract class DateUtil {
+
   private static final SimpleDateFormat DEFAULT = new SimpleDateFormat("dd/MM/yyyy");
   private static final SimpleDateFormat ANO_MES_DIA = new SimpleDateFormat("yyyyMMdd");
   private static final Logger LOGGER = Logger.getLogger(DateUtil.class.getName());
@@ -28,14 +28,13 @@ public enum DateUtil {
    * @return String
    * </pre>
    */
-  public String format(Date date) {
+  public static String format(Date date) {
     return DEFAULT.format(date);
   }
 
-  public String formataAnoMesDia(Date date) {
+  public static String formataAnoMesDia(Date date) {
     return ANO_MES_DIA.format(date);
   }
-
 
   /**
    * 
@@ -46,7 +45,7 @@ public enum DateUtil {
    * @return java.util.Date
    * </pre>
    */
-  public Date parse(String dateString) {
+  public static Date parse(String dateString) {
     Date date = null;
     try {
       date = DEFAULT.parse(dateString);
@@ -65,7 +64,7 @@ public enum DateUtil {
    * @return java.util.Date
    * </pre>
    */
-  public Date parse(String dateString, String pattern) {
+  public static Date parse(String dateString, String pattern) {
     Date date = null;
     try {
       date = new SimpleDateFormat(pattern).parse(dateString);
@@ -80,7 +79,7 @@ public enum DateUtil {
    * 
    * @return java.util.Date
    */
-  public Date getHoje() {
+  public static Date getHoje() {
     String hojeString = format(new Date());
     Date hoje = parse(hojeString);
     return hoje;
@@ -91,27 +90,27 @@ public enum DateUtil {
    * 
    * @return Calendar
    */
-  public Calendar getProximoMes() {
+  public static Calendar getProximoMes() {
     Calendar c = Calendar.getInstance();
     c.add(Calendar.MONTH, 1);
     return c;
   }
 
-  public Date getDate(int dia, int mes, int ano) {
+  public static Date getDate(int dia, int mes, int ano) {
     Calendar c = Calendar.getInstance();
     c.clear();
     c.set(ano, mes, dia);
     return c.getTime();
   }
 
-  public Calendar getUltimoDiaDoMes() {
+  public static Calendar getUltimoDiaDoMes() {
     Calendar c = getPrimeiroDiaDoMes();
     c.add(Calendar.MONTH, 1);
     c.add(Calendar.DAY_OF_MONTH, -1);
     return c;
   }
 
-  public Calendar getPrimeiroDiaDoMes() {
+  public static Calendar getPrimeiroDiaDoMes() {
     Calendar c = Calendar.getInstance();
     c.set(Calendar.DAY_OF_MONTH, 1);
     c.set(Calendar.HOUR, 0);
@@ -129,7 +128,7 @@ public enum DateUtil {
    * @return java.util.Date
    * </pre>
    */
-  public Calendar incrementaMesAtual(int quantidade) {
+  public static Calendar incrementaMesAtual(int quantidade) {
     Calendar c = Calendar.getInstance();
     c.add(Calendar.MONTH, quantidade);
     return c;

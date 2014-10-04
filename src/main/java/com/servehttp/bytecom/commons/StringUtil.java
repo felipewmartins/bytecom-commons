@@ -38,12 +38,12 @@ public abstract class StringUtil {
 
   public static Date getDataHora(String line, int inicio, int fim) {
     String data = get(line, inicio, fim);
-    return DateUtil.INSTANCE.parse(data, "ddMMyyyyHHmmss");
+    return DateUtil.parse(data, "ddMMyyyyHHmmss");
   }
 
   public static Date getData(String line, int inicio, int fim) {
     String data = get(line, inicio, fim);
-    return DateUtil.INSTANCE.parse(data, "ddMMyyyy");
+    return DateUtil.parse(data, "ddMMyyyy");
   }
 
   public static String formatCurrence(double value) {

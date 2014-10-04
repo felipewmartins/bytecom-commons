@@ -72,17 +72,19 @@ public abstract class ImageUtil implements Serializable {
    * Converte os bytesImage para um arquivo de imagem e o salva no diretório passado 
    * no folderImage com o nome passado no filename e retorna o caminho completo da imagem. <br/>
    * Por exemplo: Se passar o folder 'bytecom/img/' e passar no parametro filename 'image.png' então
-   * será criado uma imagem neste diretório com esse nome e é retornado a String 'bytecom/img/image.png'  
-   * @param bytesImage
-   * @param id
-   * @return path
+   * será criado uma imagem neste diretório com esse nome e é retornado a String 'bytecom/img/image.png'
    * </pre>
+   * 
+   * @param bytesImage
+   * @param filename
+   * @param folderImages
+   * @return String
    */
   public static String exibirImagem(byte[] bytesImage, String filename, String folderImages) {
     if (bytesImage == null) {
       return null;
     }
-    String path = null;
+    String path = "";
     try {
       File dirImageUsers = new File(folderImages);
 
@@ -96,7 +98,7 @@ public abstract class ImageUtil implements Serializable {
       imageOutput.write(bytes, 0, bytes.length);
       imageOutput.flush();
       imageOutput.close();
-      path = folderImages + filename;
+      path = folderImages.substring(folderImages.indexOf(".war") + 4) + "/" + filename;
     } catch (IOException e) {
       LOGGER.severe(e.getMessage());
     }
