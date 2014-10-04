@@ -98,7 +98,7 @@ public abstract class ImageUtil implements Serializable {
       imageOutput.write(bytes, 0, bytes.length);
       imageOutput.flush();
       imageOutput.close();
-      path = folderImages.substring(folderImages.indexOf(".war") + 4) + "/" + filename;
+      path = folderImages + filename;
     } catch (IOException e) {
       LOGGER.severe(e.getMessage());
     }
