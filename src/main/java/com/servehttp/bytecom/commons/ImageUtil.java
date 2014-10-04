@@ -22,20 +22,24 @@ import org.apache.commons.io.IOUtils;
  * @author felipe
  * 
  */
-public class ImageUtil implements Serializable {
+public abstract class ImageUtil implements Serializable {
 
   private static final long serialVersionUID = 8974017859406844766L;
   private static final Logger LOGGER = Logger.getLogger(ImageUtil.class.getName());
 
-  public byte[] tratarImagem(InputStream is) throws IOException {
+  public static byte[] tratarImagem(InputStream is) {
     byte[] byteArray = null;
     if (is != null) {
-      byteArray = IOUtils.toByteArray(is);
+      try {
+        byteArray = IOUtils.toByteArray(is);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
     return byteArray;
   }
 
-  public byte[] setThumbnail(byte[] arquivo, String extensao) {
+  public static byte[] setThumbnail(byte[] arquivo, String extensao) {
     ImageIcon imageIcon = new ImageIcon(arquivo);
     Image inImage = imageIcon.getImage();
     double scale = 140 / (double) inImage.getWidth(null);
@@ -74,7 +78,7 @@ public class ImageUtil implements Serializable {
    * @return path
    * </pre>
    */
-  public String exibirImagem(byte[] bytesImage, String filename, String folderImages) {
+  public static String exibirImagem(byte[] bytesImage, String filename, String folderImages) {
     if (bytesImage == null) {
       return null;
     }
