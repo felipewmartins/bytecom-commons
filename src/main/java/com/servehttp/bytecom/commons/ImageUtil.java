@@ -42,7 +42,7 @@ public abstract class ImageUtil implements Serializable {
   public static byte[] setThumbnail(byte[] arquivo, String extensao) {
     ImageIcon imageIcon = new ImageIcon(arquivo);
     Image inImage = imageIcon.getImage();
-    double scale = 140 / (double) inImage.getWidth(null);
+    double scale = 100 / (double) inImage.getWidth(null);
 
     int scaledW = (int) (scale * inImage.getWidth(null));
     int scaledH = (int) (scale * inImage.getHeight(null));
