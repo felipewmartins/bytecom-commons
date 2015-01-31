@@ -1,6 +1,8 @@
 package com.servehttp.bytecom.commons;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Random;
 
@@ -9,6 +11,11 @@ import java.util.Random;
  * @author clairton
  */
 public abstract class StringUtil {
+
+  private static final DateTimeFormatter FORMATTER_DATA = DateTimeFormatter.ofPattern("ddMMyyyy");
+  private static final DateTimeFormatter FORMATTER_DATA_HORA = DateTimeFormatter
+      .ofPattern("ddMMyyyyHHmmss");
+
 
   public static String gerarSenha(int tamanho) {
     StringBuilder senha = new StringBuilder();
@@ -36,14 +43,14 @@ public abstract class StringUtil {
     return Double.parseDouble(get(line, inicio, fim)) / 100;
   }
 
-  public static Date getDataHora(String line, int inicio, int fim) {
+  public static LocalDateTime getDataHora(String line, int inicio, int fim) {
     String data = get(line, inicio, fim);
-    return DateUtil.parse(data, "ddMMyyyyHHmmss");
+    return LocalDateTime.parse(data, FORMATTER_DATA_HORA);
   }
 
-  public static Date getData(String line, int inicio, int fim) {
+  public static LocalDate getData(String line, int inicio, int fim) {
     String data = get(line, inicio, fim);
-    return DateUtil.parse(data, "ddMMyyyy");
+    return LocalDate.parse(data, FORMATTER_DATA);
   }
 
   public static String formatCurrence(double value) {
